@@ -9,5 +9,5 @@ pod install
 
 ## Usage
 ```SwiftUI
-import SwiftUI
+import SwiftData
 
