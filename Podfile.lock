@@ -1,0 +1,16 @@
+PODS:
+  - SwiftData (1.1.16)
+
+DEPENDENCIES:
+  - SwiftData
+
+SPEC REPOS:
+  trunk:
+    - SwiftData
+
+SPEC CHECKSUMS:
+  SwiftData: ef7ae3df5ae5f7ce839ab754c1e91266f1a1c825
+
+PODFILE CHECKSUM: 4c62de758271d05eed47b985654b65588e5e239a
+
+COCOAPODS: 1.12.1
