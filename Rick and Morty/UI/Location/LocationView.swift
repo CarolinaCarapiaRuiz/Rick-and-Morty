@@ -14,14 +14,14 @@ struct LocationView<T>: View where T: LocationsViewModelProtocol {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: gridItemLayout, spacing: 5) {
+                LazyVGrid(columns: gridItemLayout, spacing: Constants.SizeModifiers.gridSpacing) {
                     ForEach(locationsViewModel.locations, id: \.id) { location in
                         LocationColletionRowView(location: location)
                     }
                 }
             }
-            .padding(.horizontal, 10.0)
-            .navigationTitle("Locations")
+            .padding(.horizontal, Constants.SizeModifiers.padding)
+            .navigationTitle(Constants.Localizables.locationTitle)
             .task {
                 await locationsViewModel.getLocations()
             }

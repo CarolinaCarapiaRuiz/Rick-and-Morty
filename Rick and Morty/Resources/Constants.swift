@@ -8,6 +8,7 @@
 struct Constants {
     struct Localizables {
         static let charactersTitle: String = "Characters"
+        static let locationsTitle: String = "Locations"
         static let filterByTitle: String = "Filter by:"
         static let pickerTitle: String = "Please choose a filter"
         static let searchByTypeTitle: String = "Type # to get options"
@@ -23,6 +24,8 @@ struct Constants {
         static let genderTitle: String = "Gender:"
         static let statusTitle: String = "Status:"
         static let locationTitle: String = "Location:"
+        static let typeTitle: String = "Type:"
+        static let dimensionTitle: String = "Dimension:"
     }
     
     struct SizeModifiers {
@@ -33,5 +36,7 @@ struct Constants {
         static let lineWidth: Double = 1.0
         static let radius: Double = 5.0
         static let imageRadius: Double = 2.0
+        static let rectangleRadius: Double = 3.0
+        static let gridSpacing: Double = 5.0
     }
 }

@@ -12,14 +12,14 @@ struct LocationColletionRowView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 5)
-                .strokeBorder(SwiftUI.Color.gray, lineWidth: 1)
+            RoundedRectangle(cornerRadius: Constants.SizeModifiers.radius)
+                .strokeBorder(SwiftUI.Color.gray, lineWidth: Constants.SizeModifiers.lineWidth)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .background(Color.white)
-                .shadow(color: Color.gray, radius: 3)
+                .shadow(color: Color.gray, radius: Constants.SizeModifiers.rectangleRadius)
             
             
-            VStack(alignment: .leading, spacing: 10.0) {
+            VStack(alignment: .leading, spacing: Constants.SizeModifiers.padding) {
                 HStack {
                     Image(systemName: "location.circle")
                         .foregroundColor(Color.orange)
@@ -31,7 +31,7 @@ struct LocationColletionRowView: View {
                 }
                 
                 HStack {
-                    Text("Type:")
+                    Text(Constants.Localizables.typeTitle)
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(.black)
@@ -41,7 +41,7 @@ struct LocationColletionRowView: View {
                         .foregroundStyle(.black)
                 }
                 VStack(alignment: .leading) {
-                    Text("Dimension:")
+                    Text(Constants.Localizables.dimensionTitle)
                         .font(.title3)
                         .fontWeight(.medium)
                         .foregroundStyle(.black)
@@ -52,7 +52,7 @@ struct LocationColletionRowView: View {
                 }
             }
             .foregroundColor(Color("Blue"))
-            .padding(.all, 10.0)
+            .padding(.all, Constants.SizeModifiers.padding)
             
         }
     }
