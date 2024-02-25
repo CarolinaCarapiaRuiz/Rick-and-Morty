@@ -19,7 +19,7 @@ struct CharacterDetailView: View {
         NavigationStack {
             ZStack {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(SwiftUI.Color.gray, lineWidth: 1)
+                    .strokeBorder(SwiftUI.Color.gray, lineWidth: Constants.SizeModifiers.lineWidth)
                     .frame(width: cardAndImageWidth, height: cardHeight)
                     .background(SwiftUI.Color.white)
                 
@@ -27,15 +27,15 @@ struct CharacterDetailView: View {
                     AsyncImage(url: URL(string: character.image)) { phase in
                         if let image = phase.image {
                             image.resizable()
-                                .frame(width: cardAndImageWidth, height: 300)
+                                .frame(width: cardAndImageWidth, height: Constants.SizeModifiers.imageHeight)
                                 .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                                .shadow(color: Color.gray, radius: 2)
+                                .shadow(color: Color.gray, radius: Constants.SizeModifiers.imageRadius)
                         }
                     }
-                    VStack(alignment: .leading, spacing: 20.0) {
+                    VStack(alignment: .leading, spacing: Constants.SizeModifiers.leadingSpacing) {
                         HStack{
                             HStack {
-                                Text("Species:")
+                                Text(Constants.Localizables.specieTitle)
                                     .font(.title3)
                                     .foregroundStyle(.primary)
                                 Text(character.species)
@@ -43,7 +43,7 @@ struct CharacterDetailView: View {
                                     .foregroundStyle(.secondary)
                             }
                             HStack {
-                                Text("Gender:")
+                                Text(Constants.Localizables.genderTitle)
                                     .font(.title3)
                                     .foregroundStyle(.primary)
                                 Text(character.gender.rawValue)
@@ -52,9 +52,9 @@ struct CharacterDetailView: View {
                             }
                         }
                         
-                        VStack(alignment: .leading, spacing: 20.0){
+                        VStack(alignment: .leading, spacing: Constants.SizeModifiers.leadingSpacing){
                             HStack {
-                                Text("Status:")
+                                Text(Constants.Localizables.statusTitle)
                                     .font(.title3)
                                     .foregroundStyle(.primary)
                                 Text(character.status.rawValue)
@@ -62,7 +62,7 @@ struct CharacterDetailView: View {
                                     .foregroundStyle(.secondary)
                             }
                             HStack {
-                                Text("Origin:")
+                                Text(Constants.Localizables.originTitle)
                                     .font(.title3)
                                     .foregroundStyle(.primary)
                                 Text(character.origin.name)
@@ -71,14 +71,14 @@ struct CharacterDetailView: View {
                             }
                         }
                         HStack {
-                            Text("Location:")
+                            Text(Constants.Localizables.locationTitle)
                                 .font(.title3)
                                 .foregroundStyle(.primary)
                             Text(character.location.name)
                                 .font(.title3)
                                 .foregroundStyle(.secondary)
                         }
-                    }.padding(20)
+                    }.padding(Constants.SizeModifiers.leadingSpacing)
                     Spacer()
                 }.foregroundColor(Color("Blue"))
             }

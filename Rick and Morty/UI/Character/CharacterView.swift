@@ -18,9 +18,9 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
         if searchCharacter.starts(with: "#") {
             switch filterOption {
             case .status:
-                return [Token(name: "Alive"), Token(name: "Dead")]
+                return [Token(name: Constants.Localizables.aliveStatus), Token(name: Constants.Localizables.deadStatus)]
             case .gender:
-                return [Token(name: "Female"), Token(name: "Male"), Token(name: "Genderless"), Token(name: "unknown")]
+                return [Token(name: Constants.Localizables.femaleGender), Token(name: Constants.Localizables.maleGender), Token(name: Constants.Localizables.gendeless), Token(name: Constants.Localizables.unknown)]
             default:
                 return []
             }
@@ -46,11 +46,6 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
         return characterViewModel.characters
     }
     
-    struct Token: Identifiable {
-        var id: String { name }
-        var name: String
-    }
-    
     var body: some View {
         NavigationStack {
             List(filteredCharacters, id: \.id) { character in
@@ -59,14 +54,14 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
                     CharacterViewCell(character: character)
                 }
             }
-            .navigationTitle("Characters")
+            .navigationTitle(Constants.Localizables.charactersTitle)
             .task {
                 await characterViewModel.getCharacters()
             }
             .toolbar {
                 HStack {
-                    Text("Filter by:")
-                    Picker("Please choose a filter", selection: $filterOption) {
+                    Text(Constants.Localizables.filterByTitle)
+                    Picker(Constants.Localizables.pickerTitle, selection: $filterOption) {
                         ForEach(FilterOption.allCases, id: \.self) { filter in
                             Text(filter.rawValue)
                         }
@@ -83,9 +78,9 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
     
     func getPrompt() -> String {
         if filterOption == .gender || filterOption == .status {
-            return "Type # to get options"
+            return Constants.Localizables.searchByTypeTitle
         }
-        return "Type to filter"
+        return Constants.Localizables.searchTitle
     }
     
     init(viewModel: T) {

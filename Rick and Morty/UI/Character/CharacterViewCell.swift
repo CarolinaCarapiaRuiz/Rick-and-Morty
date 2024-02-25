@@ -11,30 +11,31 @@ struct CharacterViewCell: View {
     var character: Characters
     var body: some View {
         HStack {
-            let imageLength: Double = 50
+            let imageLength: Double = Constants.SizeModifiers.imageLength
+            
             AsyncImage(url: URL(string: character.image)) { phase in
                 if let image = phase.image {
                     image.resizable()// Displays the loaded image.
                         .clipShape(Circle())
                         .overlay(Circle()
-                            .stroke(Color.gray, lineWidth: 1))
-                        .shadow(color: Color.gray, radius: 5)
+                            .stroke(Color.gray, lineWidth: Constants.SizeModifiers.lineWidth))
+                        .shadow(color: Color.gray, radius: Constants.SizeModifiers.radius)
                 }
             }
             
             .frame(width: imageLength, height: imageLength)
-            .padding(10)
+            .padding(Constants.SizeModifiers.padding)
             VStack(alignment: .leading) {
                 Text(character.name)
                     .font(.title3)
                     .fontWeight(.bold)
                 HStack {
-                    Text("Spacie: ")
+                    Text(Constants.Localizables.specieTitle)
                         .fontWeight(.semibold)
                     Text(character.species)
                 }
                 HStack{
-                    Text("Origin:")
+                    Text(Constants.Localizables.originTitle)
                         .fontWeight(.semibold)
                     Text(character.origin.name)
                 }
