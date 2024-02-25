@@ -16,6 +16,11 @@ struct MainView: View {
                 .tabItem {
                     Label("Character", systemImage: "person.circle.fill")
                 }
+            let locationViewModel = LocationsViewModel(service: service)
+            LocationView(viewModel: locationViewModel)
+                .tabItem {
+                    Label("Location", systemImage: "location.circle.fill")
+                }
         }
     }
 }
