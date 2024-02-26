@@ -10,7 +10,7 @@ import Foundation
 final class LocationsAdapter: LocationsPort {
     var service: ServicePort
     @Published var locations: [Location]
-
+    
     init(service: ServicePort ) {
         self.service = service
         self.locations = [Location]()
@@ -21,12 +21,12 @@ final class LocationsAdapter: LocationsPort {
             guard let self = self else { return }
             switch result {
             case .success(let model):
-                print(model)
                 DispatchQueue.main.async {
                     self.locations = model.results
                 }
             case .failure(let error):
                 print(error)
+                // TODO: Send an alert
             }
         }
     }

@@ -1,22 +1,24 @@
 //
-//  CharacterAdapter.swift
-//  Rick and Morty
+//  CharactersAdapterStub.swift
+//  Rick and MortyTests
 //
-//  Created by Carolina Carapia on 22/02/24.
+//  Created by Carolina Carapia on 25/02/24.
 //
-
+@testable import Rick_and_Morty
+import XCTest
 import Foundation
 
-final class CharacterAdapter: CharacterPort {
-    @Published var characters: [Characters]
-    private let service: ServicePort
+final class CharactersAdapterStub: CharacterPort {
+    var characters: [Rick_and_Morty.Characters]
+    private let service: MockService
     
-    init(service: ServicePort) {
-        self.characters = [Characters]()
+    init(service: MockService) {
         self.service = service
+        self.characters = []
     }
     
     func getCharacters() async {
+        service.fileName = "AllCharacters"
         service.execute(.listCharactersRequests, expenting: GetAllCharactersResponse.self) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -26,27 +28,26 @@ final class CharacterAdapter: CharacterPort {
                     self.characters = results
                 }
             case .failure(let error):
-                print(error)
-                // TODO: Send an alert
+                XCTFail("Expected failure with error \(error), got \(result) instead")
             }
         }
     }
     
-    func filteredList(option: FilterOption, filteredKey: String) {
+    func filteredList(option: Rick_and_Morty.FilterOption, filteredKey: String) {
+        service.fileName = "AllCharacters"
         let queryItems: [URLQueryItem] = [URLQueryItem(name: option.rawValue, value: filteredKey)]
-        let request: Request = Request(endpoint: .character, queryParameters: queryItems)
+        let request: RequestStub = RequestStub(endpoint: .character, queryParameters: queryItems)
         service.execute(request, expenting: GetAllCharactersResponse.self) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let model):
                 guard let results = model.results else { return }
-                DispatchQueue.main.async {
-                    self.characters = results
-                }
+                self.characters = results
             case .failure(let error):
-                print(error)
-                // TODO: Send an alert
+                XCTFail("Expected failure with error \(error), got \(result) instead")
             }
         }
     }
+    
+    
 }
