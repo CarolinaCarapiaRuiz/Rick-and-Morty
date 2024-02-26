@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040149FA2B8CEE7C00CDF103 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040149F92B8CEE7C00CDF103 /* ServiceError.swift */; };
 		04E108302B8C3050001DFB6F /* CharactersAdapterStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1082F2B8C3050001DFB6F /* CharactersAdapterStubTest.swift */; };
 		04E108322B8C30C2001DFB6F /* MockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E108312B8C30C2001DFB6F /* MockService.swift */; };
 		04E108372B8C32EA001DFB6F /* CharactersAdapterStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E108362B8C32EA001DFB6F /* CharactersAdapterStub.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040149F92B8CEE7C00CDF103 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 		04E1082F2B8C3050001DFB6F /* CharactersAdapterStubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersAdapterStubTest.swift; sourceTree = "<group>"; };
 		04E108312B8C30C2001DFB6F /* MockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockService.swift; sourceTree = "<group>"; };
 		04E108342B8C321B001DFB6F /* AllCharacters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllCharacters.json; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				04FDC9502B891BAD0003EF23 /* FilterCharacterOption.swift */,
+				040149F92B8CEE7C00CDF103 /* ServiceError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040149FA2B8CEE7C00CDF103 /* ServiceError.swift in Sources */,
 				04FDC95F2B8B08BE0003EF23 /* Constants.swift in Sources */,
 				04ECE7112B8714E5004A4280 /* Character.swift in Sources */,
 				04ECE7152B871500004A4280 /* Location.swift in Sources */,

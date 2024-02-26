@@ -9,5 +9,6 @@ import Foundation
 
 protocol LocationsPort: ObservableObject {
     var locations: [Location] { get set }
+    var serviceError: ServiceError? { get set }
     func getLocations() async
 }

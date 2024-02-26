@@ -9,7 +9,16 @@ import SwiftUI
 
 struct LocationView<T>: View where T: LocationsPort {
     @ObservedObject private var locationsAdapter: T
+    @State private var error: ServiceError?
     private var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
+
+    var isShowingError: Binding<Bool> {
+        Binding {
+            locationsAdapter.serviceError != nil
+        } set: { _ in
+            error = locationsAdapter.serviceError
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -24,6 +33,9 @@ struct LocationView<T>: View where T: LocationsPort {
             .navigationTitle(Constants.Localizables.locationTitle)
             .task {
                 await locationsAdapter.getLocations()
+            }
+            .alert(isPresented: isShowingError) {
+                Alert(title: Text(Constants.Localizables.importantMessage), message: Text(error?.description ?? ServiceError.failedToCreateRequest.description), dismissButton: .default(Text(Constants.Localizables.gotit)))
             }
         }
     }

@@ -26,6 +26,8 @@ struct Constants {
         static let locationTitle: String = "Location:"
         static let typeTitle: String = "Type:"
         static let dimensionTitle: String = "Dimension:"
+        static let gotit: String = "Got it!"
+        static let importantMessage: String = "Important message"
     }
     
     struct SizeModifiers {

@@ -10,6 +10,7 @@ import Foundation
 final class LocationsAdapter: LocationsPort {
     var service: ServicePort
     @Published var locations: [Location]
+    @Published var serviceError: ServiceError?
     
     init(service: ServicePort ) {
         self.service = service
@@ -25,8 +26,9 @@ final class LocationsAdapter: LocationsPort {
                     self.locations = model.results
                 }
             case .failure(let error):
-                print(error)
-                // TODO: Send an alert
+                DispatchQueue.main.async {
+                    self.serviceError = ServiceError.failedRequest(error: error)
+                }
             }
         }
     }

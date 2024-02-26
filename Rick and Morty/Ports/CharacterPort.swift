@@ -9,6 +9,7 @@ import Foundation
 
 protocol CharacterPort: ObservableObject {
     var characters: [Characters] { get set }
+    var serviceError: ServiceError? { get set }
     func getCharacters() async
     func filteredList(option: FilterOption, filteredKey: String)
 }

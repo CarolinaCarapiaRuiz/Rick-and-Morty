@@ -9,6 +9,8 @@ import XCTest
 import Foundation
 
 final class CharactersAdapterStub: CharacterPort {
+    var serviceError: Rick_and_Morty.ServiceError?
+    
     var characters: [Rick_and_Morty.Characters]
     private let service: MockService
     

@@ -8,10 +8,6 @@
 import Foundation
 
 final class Service: ServicePort {
-    enum ServiceError: Error {
-        case failedToCreateRequest
-        case failedToGetData
-    }
     
     func execute<T: Codable>(_ request: Request, expenting type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let urlRequest = self.request(from: request)

@@ -9,6 +9,7 @@ import Foundation
 
 final class CharacterAdapter: CharacterPort {
     @Published var characters: [Characters]
+    @Published var serviceError: ServiceError?
     private let service: ServicePort
     
     init(service: ServicePort) {
@@ -26,8 +27,9 @@ final class CharacterAdapter: CharacterPort {
                     self.characters = results
                 }
             case .failure(let error):
-                print(error)
-                // TODO: Send an alert
+                DispatchQueue.main.async {
+                    self.serviceError = ServiceError.failedRequest(error: error)
+                }
             }
         }
     }
@@ -44,8 +46,9 @@ final class CharacterAdapter: CharacterPort {
                     self.characters = results
                 }
             case .failure(let error):
-                print(error)
-                // TODO: Send an alert
+                DispatchQueue.main.async {
+                    self.serviceError = ServiceError.failedRequest(error: error)
+                }
             }
         }
     }

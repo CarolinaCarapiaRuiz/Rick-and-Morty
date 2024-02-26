@@ -13,6 +13,14 @@ struct CharacterView<T>: View where T: CharacterAdapter {
     @State private var searchCharacter: String
     @State private var filterOption: FilterOption
     @State private var searchIsActive = false
+    @State private var error: ServiceError?
+    var isShowingError: Binding<Bool> {
+        Binding {
+            characterAdapter.serviceError != nil
+        } set: { _ in
+            error = characterAdapter.serviceError
+        }
+    }
     
     private var suggestedTokens: [Token] {
         if searchCharacter.starts(with: "#") {
@@ -71,6 +79,9 @@ struct CharacterView<T>: View where T: CharacterAdapter {
             }
             .searchable(text: $searchCharacter, tokens: $currentToken, suggestedTokens: .constant(suggestedTokens), prompt: Text(getPrompt())) { status in
                 Text(status.name)
+            }
+            .alert(isPresented: isShowingError) {
+                Alert(title: Text(Constants.Localizables.importantMessage), message: Text(error?.description ?? ServiceError.failedToCreateRequest.description), dismissButton: .default(Text(Constants.Localizables.gotit)))
             }
         }
         
