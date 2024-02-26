@@ -1,5 +1,5 @@
 //
-//  LocationsViewModel.swift
+//  LocationsAdapter.swift
 //  Rick and Morty
 //
 //  Created by Carolina Carapia on 23/02/24.
@@ -7,16 +7,11 @@
 
 import Foundation
 
-protocol LocationsViewModelProtocol: ObservableObject {
-    var locations: [Location] { get set }
-    func getLocations() async
-}
-
-final class LocationsViewModel: LocationsViewModelProtocol{
-    var service: Service
+final class LocationsAdapter: LocationsPort {
+    var service: ServicePort
     @Published var locations: [Location]
 
-    init(service: Service ) {
+    init(service: ServicePort ) {
         self.service = service
         self.locations = [Location]()
     }

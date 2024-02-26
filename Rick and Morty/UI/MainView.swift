@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct MainView: View {
-    let service: Service = Service()
+    let service: ServicePort = Service()
     var body: some View {
         TabView {
-            let characterViewModel = CharacterViewModel(service: service)
-            CharacterView(viewModel: characterViewModel)
+            let characterAdapter = CharacterAdapter(service: service)
+            CharacterView(adapter: characterAdapter)
                 .tabItem {
                     Label("Character", systemImage: "person.circle.fill")
                 }
-            let locationViewModel = LocationsViewModel(service: service)
-            LocationView(viewModel: locationViewModel)
+            let locationsAdapter = LocationsAdapter(service: service)
+            LocationView(adapter: locationsAdapter)
                 .tabItem {
                     Label("Location", systemImage: "location.circle.fill")
                 }

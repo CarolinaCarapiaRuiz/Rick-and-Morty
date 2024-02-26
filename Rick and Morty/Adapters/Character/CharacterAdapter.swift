@@ -1,5 +1,5 @@
 //
-//  CharacterViewModel.swift
+//  CharacterAdapter.swift
 //  Rick and Morty
 //
 //  Created by Carolina Carapia on 22/02/24.
@@ -7,17 +7,11 @@
 
 import Foundation
 
-protocol CharacterViewModelProtocol: ObservableObject {
-    var characters: [Characters] { get set }
-    func getCharacters() async
-    func filteredList(option: FilterOption, filteredKey: String)
-}
-
-final class CharacterViewModel: CharacterViewModelProtocol {
+final class CharacterAdapter: CharacterPort {
     @Published var characters: [Characters]
-    private let service: Service
+    private let service: ServicePort
     
-    init(service: Service) {
+    init(service: ServicePort) {
         self.characters = [Characters]()
         self.service = service
     }

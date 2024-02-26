@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CharacterDetailView: View {
-    let viewModel: CharacterDetailViewModel
+    let adapter: CharacterDetailAdapter
     let character: Characters
     let cardAndImageWidth: CGFloat = 350
     let cardHeight: CGFloat = 600
@@ -87,15 +87,15 @@ struct CharacterDetailView: View {
         
     }
     
-    init(viewModel: CharacterDetailViewModel) {
-        self.viewModel = viewModel
-        self.character = self.viewModel.character
+    init(adapter: CharacterDetailAdapter) {
+        self.adapter = adapter
+        self.character = self.adapter.character
     }
 }
 
 struct CharacterDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let character: Characters = Characters(id: 1, name: "Rick Sanchez", status: .alive, species: "Human", type: "", gender: .male, origin: Origin(name: "Earth (C-137)", url: "https://rickandmortyapi.com/api/location/1"), location: SingleLocation(name: "Citadel of Ricks", url: "https://rickandmortyapi.com/api/location/3"), image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg", episode: ["https://rickandmortyapi.com/api/episode/1", "https://rickandmortyapi.com/api/episode/2", "https://rickandmortyapi.com/api/episode/3"], url: "https://rickandmortyapi.com/api/character/1", created: "2017-11-04T18:48:46.250Z")
-        CharacterDetailView(viewModel: CharacterDetailViewModel(character: character))
+        CharacterDetailView(adapter: CharacterDetailAdapter(character: character))
     }
 }

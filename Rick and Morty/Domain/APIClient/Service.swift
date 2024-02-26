@@ -7,14 +7,7 @@
 
 import Foundation
 
-protocol ServiceProtocol {
-    func execute<T: Codable>(_ request: Request, expenting type: T.Type, completion: @escaping (Result<T, Error>) -> Void)
-    
-}
-
-final class Service: ServiceProtocol {
-//    static let shared = Service()
-
+final class Service: ServicePort {
     enum ServiceError: Error {
         case failedToCreateRequest
         case failedToGetData

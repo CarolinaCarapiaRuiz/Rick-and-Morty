@@ -8,8 +8,8 @@
 import SwiftUI
 import SwiftData
 
-struct CharacterView<T>: View where T: CharacterViewModelProtocol {
-    @ObservedObject private var characterViewModel: T
+struct CharacterView<T>: View where T: CharacterAdapter {
+    @ObservedObject private var characterAdapter: T
     @State private var searchCharacter: String
     @State private var filterOption: FilterOption
     @State private var searchIsActive = false
@@ -35,28 +35,28 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
         let trimmedSearchText = searchCharacter.trimmingCharacters(in: .whitespaces)
         if !trimmedSearchText.isEmpty || !currentToken.isEmpty {
             if !trimmedSearchText.isEmpty {
-                characterViewModel.filteredList(option: filterOption, filteredKey: trimmedSearchText )
+                characterAdapter.filteredList(option: filterOption, filteredKey: trimmedSearchText )
             }
             
             if !currentToken.isEmpty {
-                characterViewModel.filteredList(option: filterOption, filteredKey: currentToken.map{String($0.name)}.joined(separator: ","))
+                characterAdapter.filteredList(option: filterOption, filteredKey: currentToken.map{String($0.name)}.joined(separator: ","))
             }
         }
         
-        return characterViewModel.characters
+        return characterAdapter.characters
     }
     
     var body: some View {
         NavigationStack {
             List(filteredCharacters, id: \.id) { character in
-                NavigationLink(destination: CharacterDetailView(viewModel: CharacterDetailViewModel(character: character)))
+                NavigationLink(destination: CharacterDetailView(adapter: CharacterDetailAdapter(character: character)))
                 {
                     CharacterViewCell(character: character)
                 }
             }
             .navigationTitle(Constants.Localizables.charactersTitle)
             .task {
-                await characterViewModel.getCharacters()
+                await characterAdapter.getCharacters()
             }
             .toolbar {
                 HStack {
@@ -83,8 +83,8 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
         return Constants.Localizables.searchTitle
     }
     
-    init(viewModel: T) {
-        self.characterViewModel = viewModel
+    init(adapter: T) {
+        self.characterAdapter = adapter
         self.searchCharacter = ""
         self.filterOption = .name
     }
@@ -93,7 +93,7 @@ struct CharacterView<T>: View where T: CharacterViewModelProtocol {
 struct CharacterView_Previews: PreviewProvider {
     static var previews: some View {
         let service: Service = Service()
-        let viewModel = CharacterViewModel(service: service)
-        CharacterView(viewModel: viewModel)
+        let adapter = CharacterAdapter(service: service)
+        CharacterView(adapter: adapter)
     }
 }
